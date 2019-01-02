@@ -1,7 +1,6 @@
 const express = require("express");
 const path = require('path');
 require('dotenv').config();
-// const uri = require('./public/js/uri').toString();
 const uri = process.env.DB_URI;
 const wrap = require('./src/middleware/wrap');
 const moment = require('moment');
@@ -31,7 +30,7 @@ const nav = require('./public/js/nav');
 const app = express();
 
 const adminRouter = require('./src/routes/adminRoutes')(nav);
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 //app.use('/post', postRouter);
 //app.use('/admin', adminRouter);
 
