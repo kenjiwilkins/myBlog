@@ -1,0 +1,21 @@
+{
+  "name": "myblog",
+  "version": "1.0.0",
+  "description": "create my personal blog using mongodb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kenji Wilkins",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.2.1",
+    "dotenv": "^6.2.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "jquery": "^3.3.1",
+    "moment": "^2.23.0",
+    "mongodb": "^3.1.10",
+    "mongoose": "^5.4.1"
+  }
+}
