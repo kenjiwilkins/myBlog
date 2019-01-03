@@ -2,6 +2,7 @@ const express = require("express");
 const path = require('path');
 require('dotenv').config({});
 const uri = process.env.MONGODB_URI;
+console.log(process.env.MONGODB_URI);
 const wrap = require('./src/middleware/wrap');
 const moment = require('moment');
 const mongoose = require('mongoose');
