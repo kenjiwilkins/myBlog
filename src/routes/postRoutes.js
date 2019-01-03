@@ -5,7 +5,7 @@ require('dotenv').config();
 const uri = process.env.DB_URI;
 const moment = require('moment');
 const mongoose = require('mongoose');
-const nav = require('../js/nav');
+const nav = require('../dbs/nav');
 
     mongoose.connect(uri, {useNewUrlParser: true, dbName: 'posts'});
     const db = mongoose.connection;
