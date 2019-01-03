@@ -6,6 +6,7 @@ const wrap = require('./src/middleware/wrap');
 const moment = require('moment');
 const mongoose = require('mongoose');
 mongoose.connect(uri,{useNewUrlParser: true});
+console.log(uri);
 //mongoose.connect(uri, {useNewUrlParser: true, dbName: 'posts'});
 const db = mongoose.connection;
 const Schema = mongoose.Schema;
