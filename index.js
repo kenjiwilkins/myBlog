@@ -1,11 +1,11 @@
 const express = require("express");
 const path = require('path');
 require('dotenv').config();
-const uri = process.env.HEROKU_DB_URI.toString();
+const uri = process.env.HEROKU_DB_URI;
 const wrap = require('./src/middleware/wrap');
 const moment = require('moment');
 const mongoose = require('mongoose');
-mongoose.connect(uri);
+mongoose.connect(uri,{useNewUrlParser: true});
 //mongoose.connect(uri, {useNewUrlParser: true, dbName: 'posts'});
 const db = mongoose.connection;
 const Schema = mongoose.Schema;
