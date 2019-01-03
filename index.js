@@ -1,13 +1,8 @@
 const express = require("express");
 const path = require('path');
-// require('dotenv').config({});
-// const uri = process.env.MONGODB_URI;
-// console.log(process.env.MONGODB_URI);
-//const wrap = require('./src/middleware/wrap');
 const moment = require('moment');
 const mongoose = require('mongoose');
 mongoose.connect(process.env.HEROKU_DB_URI, {useNewUrlParser: true});
-//mongoose.connect(uri, {useNewUrlParser: true, dbName: 'posts'});
 const db = mongoose.connection;
 const Schema = mongoose.Schema;
 const blogSchema = new Schema({
@@ -19,22 +14,11 @@ const blogSchema = new Schema({
 });
 db.on('error', console.error.bind(console, 'connection error:'));
 
-// db.once('open', function(){
-//     const model = db.model('posts', blogSchema, 'blogPosts');
-//     const query = model.find({}).sort("-date").exec();
-//     query.then((value) => {
-//         posts = value;
-//     })
-// });
-
 const nav = require('./src/dbs/nav');
 
 const app = express();
 
-//const adminRouter = require('./src/routes/adminRoutes')(nav);
 const port = process.env.PORT || 8080;
-//app.use('/post', postRouter);
-//app.use('/admin', adminRouter);
 
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
@@ -43,22 +27,11 @@ app.use('/css', express.static(path.join(__dirname, '/node_modules/bootstrap/dis
 app.use('/js', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/js')));
 app.use('/js', express.static(path.join(__dirname,'/node_modules/jquery/dist')));
 
-
 const postRouter = require('./src/routes/postRoutes');
 app.use('/post', postRouter);
 
 app.get('/', (async (req, res, next) => {
     try{
-        // await mongoose.connect("mongodb://KenjiWilkins:Haruki1984@ds247674.mlab.com:47674/posts",{useNewUrlParser: true});
-        // const db = await mongoose.connection;
-        // const Schema = mongoose.Schema;
-        // const blogSchema = new Schema({
-        //     title: String,
-        //     date: Date,
-        //     author: String,
-        //     postBody: String,
-        //     category: String
-        // });
         let posts = await db.model('posts', blogSchema, 'blogPosts')
             .find({}).sort('-date').exec();
         let dates = [];
