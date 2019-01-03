@@ -5,7 +5,7 @@ const uri = process.env.MONGODB_URI;
 const wrap = require('./src/middleware/wrap');
 const moment = require('moment');
 const mongoose = require('mongoose');
-mongoose.connect(uri,{useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URI,{useNewUrlParser: true});
 //mongoose.connect(uri, {useNewUrlParser: true, dbName: 'posts'});
 const db = mongoose.connection;
 const Schema = mongoose.Schema;
