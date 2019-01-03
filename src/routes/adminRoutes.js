@@ -3,6 +3,7 @@ const MongoClient = require('mongodb').MongoClient;
 const adminRouter = express.Router();
 require('dotenv').config();
 const uri = process.env.DB_URI;
+const nav = require('../dbs/nav');
 
 const posts = [
     {
