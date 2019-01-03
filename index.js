@@ -49,7 +49,7 @@ app.use('/post', postRouter);
 
 app.get('/', wrap(async (req, res, next) => {
     try{
-        await mongoose.connect("mongodb://heroku_plx5fpfg:njmdagh7d6kfllr4kcd0pvafih@ds247674.mlab.com:47674/heroku_plx5fpfg",{useNewUrlParser:true});
+        await mongoose.connect("mongodb://heroku_plx5fpfg:njmdagh7d6kfllr4kcd0pvafih@ds247674.mlab.com:47674/heroku_plx5fpfg");
         const db = await mongoose.connection;
         const Schema = mongoose.Schema;
         const blogSchema = new Schema({
