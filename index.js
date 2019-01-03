@@ -27,11 +27,11 @@ const mongoose = require('mongoose');
 //     })
 // });
 
-const nav = require('./public/js/nav');
+//const nav = require('./public/js/nav');
 
 const app = express();
 
-const adminRouter = require('./src/routes/adminRoutes')(nav);
+//const adminRouter = require('./src/routes/adminRoutes')(nav);
 const port = process.env.PORT || 8080;
 //app.use('/post', postRouter);
 //app.use('/admin', adminRouter);
@@ -49,7 +49,7 @@ app.use('/post', postRouter);
 
 app.get('/', wrap(async (req, res, next) => {
     try{
-        await mongoose.connect(process.env.HEROKU_DB_URI);
+        await mongoose.connect("mongodb://heroku_plx5fpfg:njmdagh7d6kfllr4kcd0pvafih@ds247674.mlab.com:47674/heroku_plx5fpfg");
         const db = await mongoose.connection;
         const Schema = mongoose.Schema;
         const blogSchema = new Schema({
