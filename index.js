@@ -27,7 +27,7 @@ const mongoose = require('mongoose');
 //     })
 // });
 
-//const nav = require('./public/js/nav');
+const nav = require('./src/dbs/nav');
 
 const app = express();
 
