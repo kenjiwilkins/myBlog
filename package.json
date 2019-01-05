@@ -9,6 +9,7 @@
   "author": "Kenji Wilkins",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "bootstrap": "^4.2.1",
     "dotenv": "^6.2.0",
     "ejs": "^2.6.1",
