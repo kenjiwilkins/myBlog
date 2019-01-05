@@ -34,9 +34,9 @@ postRouter.route('/:id')
         let post = await db.model('posts', blogSchema, 'blogPosts')
         .findOne({_id : req.params.id}).exec();
         let date = await moment(post.date).format("MMMM Do YYYY");
-        let comment = await db.model('posts', commentSchema, 'comments')
+        let comments = await db.model('posts', commentSchema, 'comments')
         .find({postid : req.params.id}).exec();
-        if(!comment){
+        if(!comments){
             comments = [];
         }
         res.render('post',{
