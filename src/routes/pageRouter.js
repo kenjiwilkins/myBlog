@@ -38,8 +38,11 @@ pageRouter.route('/:num')
         let posts = await db.model('posts', blogSchema, 'blogPosts')
             .find({}).sort('-date').skip(pagenation.currentPage*4-4).limit(4).exec();
         let dates = [];
-        let check = await db.model('posts', blogSchema, 'blogPosts');
-        if(check.count < pagenation.currentPage*4+8){pagenation.older = false}
+        await db.model('posts', blogSchema, 'blogPosts').count({}, (err, count) => {
+            if(count < pagenation.currentPage*4+8){
+                pagenation.older = false;
+            }
+        });
         if(pagenation.currentPage <= 1){pagenation.newer = false}
         await posts.forEach(post => {
             dates.push(moment(post.date).format("MMMM Do YYYY"));

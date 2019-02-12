@@ -43,7 +43,6 @@ app.get('/', (async (req, res, next) => {
         let posts = await db.model('posts', blogSchema, 'blogPosts')
             .find().sort('-date').skip(currentPage*4-4).limit(4).exec();
         let dates = [];
-        let check = await db.model('posts', blogSchema, 'blogPosts');
         await posts.forEach(post => {
             dates.push(moment(post.date).format("MMMM Do YYYY"));
         });
