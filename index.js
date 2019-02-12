@@ -29,12 +29,21 @@ app.use('/js', express.static(path.join(__dirname,'/node_modules/jquery/dist')))
 
 const postRouter = require('./src/routes/postRoutes');
 app.use('/post', postRouter);
+const pageRouter = require('./src/routes/pageRouter');
+app.use('/pages', pageRouter);
 
 app.get('/', (async (req, res, next) => {
     try{
+        let pagenation = {
+            older : true,
+            newer : false,
+            currentPage : 1
+        };
+        let currentPage = 1;
         let posts = await db.model('posts', blogSchema, 'blogPosts')
-            .find({}).sort('-date').exec();
+            .find().sort('-date').skip(currentPage*4-4).limit(4).exec();
         let dates = [];
+        let check = await db.model('posts', blogSchema, 'blogPosts');
         await posts.forEach(post => {
             dates.push(moment(post.date).format("MMMM Do YYYY"));
         });
@@ -44,7 +53,8 @@ app.get('/', (async (req, res, next) => {
             page_heading: "えくぼもあばた",
             sub_heading: "by Kenji Wilkins",
             posts,
-            dates
+            dates,
+            pagenation
         });
     } catch (err) {
         next(err);

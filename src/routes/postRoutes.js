@@ -1,5 +1,4 @@
 const express = require('express');
-const {MongoClient} = require('mongodb');
 const postRouter = express.Router();
 require('dotenv').config();
 const moment = require('moment');

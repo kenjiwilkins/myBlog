@@ -75,12 +75,24 @@
 
           <!-- Pagination -->
           <ul class="pagination justify-content-center mb-4">
+            <%if(pagenation.older){%>
             <li class="page-item">
+              <a class="page-link" href="/pages/<%=pagenation.currentPage+1%>">&larr; Older</a>
+            </li>
+            <%}else{%>
+            <li class="page-item disabled">
               <a class="page-link" href="#">&larr; Older</a>
             </li>
+            <%}%>
+            <%if(pagenation.newer){%>
+            <li class="page-item">
+              <a class="page-link" href="/pages/<%=pagenation.currentPage-1%>">&rarr; Newer</a>
+            </li>
+            <%}else{%>
             <li class="page-item disabled">
               <a class="page-link" href="#">Newer &rarr;</a>
             </li>
+            <%}%>
           </ul>
 
         </div>
