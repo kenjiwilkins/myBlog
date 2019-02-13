@@ -43,7 +43,7 @@ pageRouter.route('/:num')
                 pagenation.older = false;
             }
         });
-        if(pagenation.currentPage <= 1){pagenation.newer = false}
+        if(pagenation.currentPage <= 0){pagenation.newer = false}
         await posts.forEach(post => {
             dates.push(moment(post.date).format("MMMM Do YYYY"));
         });

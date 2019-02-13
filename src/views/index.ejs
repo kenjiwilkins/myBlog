@@ -84,7 +84,11 @@
               <a class="page-link" href="#">&larr; Older</a>
             </li>
             <%}%>
-            <%if(pagenation.newer){%>
+            <%if(pagenation.currentPage == 2){%>
+            <li class="page-item">
+              <a class="page-link" href="/">Newer &rarr;</a>
+            </li>
+            <%}else if(pagenation.newer){%>
             <li class="page-item">
               <a class="page-link" href="/pages/<%=pagenation.currentPage-1%>">&rarr; Newer</a>
             </li>
