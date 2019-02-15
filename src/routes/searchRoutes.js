@@ -1,5 +1,5 @@
 const express = require('express');
-const pageRouter = express.Router();
+const searchRouter = express.Router();
 require('dotenv').config();
 const moment = require('moment');
 const mongoose = require('mongoose');
