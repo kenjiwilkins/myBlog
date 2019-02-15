@@ -14,7 +14,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/css/blog-post.css" rel="stylesheet">
+    <link href="/css/blog-home.css" rel="stylesheet">
 
   </head>
 
@@ -23,7 +23,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="/">Ekubo mo Abata</a>
+        <a class="navbar-brand" href="/"><%=title%></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -49,49 +49,55 @@
 
       <div class="row">
 
-        <!-- Post Content Column -->
-        <div class="col-lg-8">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
 
-          <!-- Title -->
-          <h1 class="mt-4"><%=page_heading%></h1>
-
-          <!-- Author -->
-          <p class="lead">
+          <h1 class="my-4"><%=page_heading%>
+            <small><%=sub_heading%></small>
+          </h1>
+          <%for(let i = 0; i < posts.length; i++){ %>
+          <!-- Blog Post -->
+          <div class="card mb-4">
             
-            <a href="/about"><%=title%></a>
-          </p>
-
-          <hr>
-
-          <!-- Date/Time -->
-          <p>Posted on December 31, 2018 at 12:00 PM</p>
-
-          <hr>
-
-          <!-- Preview Image -->
-          <img class="card-img-top" src="/img/programming.png" width="700" height="350" alt="Card image cap">
-
-          <hr>
-
-          <!-- Post Content -->
-          <p>
-          This blog is made from node.js, express.js, ejs, mongoose, served by heroku.
-          <br><br>
-          update history:<br>
-          03-01-2019 first deploy, service started.<br>
-          11-02-2019 pagenation implemented.<br>
-          15-02-2019 article body search implemented (include search results pagenation).<br>
-
-          </p>
-
-          
-          <hr>
-
+            <img class="card-img-top" src="/img/book.jpg" width="700" height="350" alt="Card image cap">
+            <div class="card-body">
+              <h2 class="card-title"><%=posts[i].title%></h2>
+              <p class="card-text"><%-posts[i].postBody%></p>
+              <a href="/post/<%=posts[i]._id%>" onclick="readmore()"class="btn btn-primary">Read More &rarr;</a>
+            </div>
+            <div class="card-footer text-muted">
+              Posted on <%=dates[i]%> by
+              <a href="#"><%=posts[i].author%></a>
+            </div>
+          </div>
+          <%}%>
           
 
-          
-
-          
+          <!-- Pagination -->
+          <ul class="pagination justify-content-center mb-4">
+            <%if(pagenation.older == true){%>
+            <li class="page-item">
+              <a class="page-link" href="/search/<%=pagenation.currentPage+1%>">&larr; Older</a>
+            </li>
+            <%}else{%>
+            <li class="page-item disabled">
+              <a class="page-link" href="#">&larr; Older</a>
+            </li>
+            <%}%>
+            <%if(pagenation.currentPage == 1){%>
+            <li class="page-item">
+              <a class="page-link" href="/">Back to Top &rarr;</a>
+            </li>
+            <%}else if(pagenation.newer){%>
+            <li class="page-item">
+              <a class="page-link" href="/search/<%=pagenation.currentPage-1%>">&rarr; Newer</a>
+            </li>
+            <%}else{%>
+            <li class="page-item disabled">
+              <a class="page-link" href="#">Newer &rarr;</a>
+            </li>
+            <%}%>
+          </ul>
 
         </div>
 
@@ -100,18 +106,20 @@
 
           <!-- Search Widget -->
           <div class="card my-4">
-            <h5 class="card-header">Search</h5>
+            <h5 class="card-header">Search(not working yet)</h5>
             <div class="card-body">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">Go!</button>
-                </span>
-              </div>
+              <form action="/search/1" method="GET">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="query" name="query" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="submit">Go!</button>
+                  </span>
+                </div>
+              </form>  
             </div>
           </div>
 
-          <!-- Categories Widget -->
+          <!-- Links Widget -->
           <div class="card my-4">
             <h5 class="card-header">Links</h5>
             <div class="card-body">
@@ -146,11 +154,16 @@
             </div>
           </div>
 
-          <!-- Side Widget -->
+          <!-- login -->
           <div class="card my-4">
-            <h5 class="card-header">Side Widget</h5>
+            <h5 class="card-header">Login</h5>
             <div class="card-body">
-              You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+              <div class="form-group">
+                <input type="text" name="userMail" placeholder="email address">
+                <input type="password" name="userPass" placeholder="password">
+                <br/><a href="#">sign up?(unavailable)</a><br/>
+                <button type="submit" class="btn btn-primary">Login</button>
+              </div>
             </div>
           </div>
 
@@ -171,9 +184,8 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
   </body>
 
 </html>

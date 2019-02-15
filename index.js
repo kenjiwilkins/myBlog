@@ -31,6 +31,8 @@ const postRouter = require('./src/routes/postRoutes');
 app.use('/post', postRouter);
 const pageRouter = require('./src/routes/pageRouter');
 app.use('/pages', pageRouter);
+const searchRouter = require('./src/routes/searchRoutes');
+app.use('/search', searchRouter);
 
 app.get('/', (async (req, res, next) => {
     try{
@@ -43,6 +45,9 @@ app.get('/', (async (req, res, next) => {
         let posts = await db.model('posts', blogSchema, 'blogPosts')
             .find().sort('-date').skip(currentPage*4-4).limit(4).exec();
         let dates = [];
+        let check = await db.model('posts', blogSchema, 'blogPosts');
+        if(check.countDocuments < pagenation.currentPage*4+8){pagenation.older = false}
+        if(pagenation.currentPage <= 1){pagenation.newer = false}
         await posts.forEach(post => {
             dates.push(moment(post.date).format("MMMM Do YYYY"));
         });
@@ -65,6 +70,24 @@ app.get('/about', (req, res) => {
     res.render('about', {
         nav,
         title: "About this blog",
+        page_heading: "えくぼもあばた",
+        sub_heading: "by Kenji Wilkins"
+    })
+})
+
+app.get('/service', (req, res) => {
+    res.render('about', {
+        nav,
+        title: 'Service',
+        page_heading: "えくぼもあばた",
+        sub_heading: "by Kenji Wilkins"
+    })
+})
+
+app.get('/contact', (req, res) => {
+    res.render('about', {
+        nav,
+        title: 'Service',
         page_heading: "えくぼもあばた",
         sub_heading: "by Kenji Wilkins"
     })
