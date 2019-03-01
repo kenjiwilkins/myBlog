@@ -88,7 +88,11 @@
             <div class="card-body">
               <form action="/post/send" method="POST">
                 <div class="form-group">
-                  <input type="text" name="commenterName" placeholder="Your Name">
+                  <%if(logininfo.login){%>
+                    <input type="text" name="commenterName" placeholder="Your Name" value="<%=logininfo.userinfo.userName%>">
+                  <%} else {%>
+                    <input type="text" name="commenterName" placeholder="Your Name">
+                  <%}%>
                   <textarea class="form-control" name="commentBody" rows="3"></textarea>
                   <input type="hidden" name="postId" value="<%=id%>">
                 </div>
