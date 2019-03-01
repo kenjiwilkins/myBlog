@@ -155,17 +155,35 @@
           </div>
 
           <!-- login -->
+          <%if(!logininfo.login){%>
           <div class="card my-4">
             <h5 class="card-header">Login</h5>
             <div class="card-body">
               <div class="form-group">
-                <input type="text" name="userMail" placeholder="email address">
-                <input type="password" name="userPass" placeholder="password">
-                <br/><a href="#">sign up?(unavailable)</a><br/>
+              <form action="/" method="POST">
+                <input type="text" name="username" id="username" placeholder="user name">
+                <input type="password" name="password" id="password" placeholder="password">
+                <br/><a href="#">sign up?(unavailable yet)</a><br/>
                 <button type="submit" class="btn btn-primary">Login</button>
+              </form>
               </div>
             </div>
           </div>
+          <%}else{%>
+          <div class="card my-4">
+            <h5 class="card-header">Hello <%=logininfo.userinfo.userName%></h5>
+            <div class="card-body">
+              <div class="form-group">
+              <form action="/account" method="GET">
+                <button type="submit" class="btn btn-primary">Account Setting</button>
+              </form><br>
+              <form action="/logout" method="GET">
+                <button type="submit" class="btn btn-primary">Logout</button>
+              </form>
+              </div>
+            </div>
+          </div>
+          <%}%>
 
         </div>
 
