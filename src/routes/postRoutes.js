@@ -29,6 +29,14 @@ postRouter.use(bodyParser.json());
 postRouter.route('/:id')
 .get( async (req, res, next) =>{
     try{
+        let logininfo = {
+            login : false,
+            userinfo : {}
+        };
+        if(req.user){
+            logininfo.login = true;
+            logininfo.userinfo = req.user.toObject();
+        }
         let id = req.params.id;
         let post = await db.model('posts', blogSchema, 'blogPosts')
         .findOne({_id : req.params.id}).exec();
@@ -46,7 +54,8 @@ postRouter.route('/:id')
             post,
             date,
             comments,
-            id
+            id,
+            logininfo
         });
     }
     catch(err) {

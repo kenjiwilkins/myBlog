@@ -23,6 +23,14 @@ searchRouter.use(bodyParser.json());
 searchRouter.route('/:num')
 .get( async (req, res, next) =>{
 try{
+    let logininfo = {
+        login : false,
+        userinfo : {}
+    };
+    if(req.user){
+        logininfo.login = true;
+        logininfo.userinfo = req.user.toObject();
+    }
     let query = req.query.query;
     if(!query){
         return Promise.resolve(res.redirect('../'));
@@ -51,7 +59,8 @@ try{
         sub_heading: `${count} articles found`,
         posts,
         dates,
-        pagenation
+        pagenation,
+        logininfo
     });
 } catch (err) {
     next(err);

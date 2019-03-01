@@ -28,6 +28,14 @@ pageRouter.use(bodyParser.json());
 pageRouter.route('/:num')
 .get( async (req, res, next) =>{
     try{
+        let logininfo = {
+            login : false,
+            userinfo : {}
+        };
+        if(req.user){
+            logininfo.login = true;
+            logininfo.userinfo = req.user.toObject();
+        }
         let pagenation = {
             older : true,
             newer : true,
@@ -54,7 +62,8 @@ pageRouter.route('/:num')
             sub_heading: "by Kenji Wilkins",
             posts,
             dates,
-            pagenation
+            pagenation,
+            logininfo
         });
     } catch (err) {
         next(err);
